@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import PortfolioContainer from "./portfolio/portfolio-container";
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home.js";
 import About from "./pages/about.js";
 import Contact from "./pages/contact.js";
 import Blog from "./pages/blog.js";
 import PortfolioDetail from "./portfolio/portfolio-detail.js";
-import Auth from "./pages/auth.js";
-import NoMatch from "./pages/no-match.js";
+import Auth from "./pages/auth";
+import NoMatch from "./pages/no-match";
 
 export default class App extends Component {
   render() {
@@ -20,7 +19,7 @@ export default class App extends Component {
             <NavigationContainer />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/auth" component={Auth} />
+              <Route path="/auth" component={Auth} />
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
