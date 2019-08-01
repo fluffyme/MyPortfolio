@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FortAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrash,
+  faSignOutAlt,
+  faEdit
+} from "@fortawesome/free-solid-svg-icons";
 
 import NavigationContainer from "./navigation/navigation-container";
 import Home from "./pages/home.js";
 import About from "./pages/about.js";
 import Contact from "./pages/contact.js";
 import Blog from "./pages/blog.js";
+import BlogDetail from "./pages/blog-detail";
 import PortfolioDetail from "./portfolio/portfolio-detail.js";
 import PortfolioManager from "./pages/portfolio-manager";
 import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
+
+library.add(faTrash, faSignOutAlt, faEdit);
 
 export default class App extends Component {
   constructor(props) {
@@ -77,7 +87,13 @@ export default class App extends Component {
   }
 
   authorizedPages() {
-    return [<Route path="/portfolio-manager" component={PortfolioManager} />];
+    return [
+      <Route
+        key="portfolio-manager"
+        path="/portfolio-manager"
+        component={PortfolioManager}
+      />
+    ];
   }
   render() {
     return (
@@ -105,6 +121,7 @@ export default class App extends Component {
 
               <Route path="/about-me" component={About} />
               <Route path="/blog" component={Blog} />
+              <Route path="/b/:slug" component={BlogDetail} />
               <Route path="/contact" component={Contact} />
               {this.state.loggedInStatus === "LOGGED_IN"
                 ? this.authorizedPages()
